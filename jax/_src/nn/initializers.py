@@ -109,6 +109,7 @@ def constant(value: ArrayLike,
 
 @export
 def uniform(scale: RealNumeric = 1e-2,
+            loc: RealNumeric = 0.0
             dtype: DTypeLikeInexact = jnp.float_) -> Initializer:
   """Builds an initializer that returns real uniformly-distributed random arrays.
 
@@ -130,7 +131,7 @@ def uniform(scale: RealNumeric = 1e-2,
            shape: core.Shape,
            dtype: DTypeLikeInexact = dtype) -> Array:
     dtype = dtypes.canonicalize_dtype(dtype)
-    return random.uniform(key, shape, dtype) * jnp.array(scale, dtype)
+    return random.uniform(key, shape, dtype) * jnp.array(scale, dtype) + jnp.array(loc, dtype)
   return init
 
 @export
